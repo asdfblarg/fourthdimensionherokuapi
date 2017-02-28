@@ -25,7 +25,7 @@ SECRET_KEY = '0-40h^0=^q83)^(-e)o+$kalhfo(!6v)ch$j3rw9l2*be)z-oa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'fourthdimensiontestapi.herokuapp.com']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'snippets.apps.SnippetsConfig',
+    # 'snippets.apps.SnippetsConfig',
     'task.apps.TaskConfig'
 ]
 
