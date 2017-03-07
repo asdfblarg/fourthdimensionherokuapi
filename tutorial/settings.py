@@ -38,12 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'snippets.apps.SnippetsConfig',
-    'task.apps.TaskConfig'
+    'task.apps.TaskConfig',
+    # 'django-crispy-forms',
 ]
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'PAGE_SIZE': 10,
 }
 
 MIDDLEWARE = [

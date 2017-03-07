@@ -2,7 +2,7 @@ from django.shortcuts import render
 from task.models import Task_Table, Announcements
 from rest_framework import viewsets
 from task.serializers import TaskSerializer, AnnoucementsSerializer
-
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 # Create your views here.
@@ -14,6 +14,9 @@ class TaskViewSet(viewsets.ModelViewSet):
     """
     queryset = Task_Table.objects.all()
     serializer_class = TaskSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('label', 'completed', 'designee')
+
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
     #                       IsOwnerOrReadOnly,)
 
@@ -28,6 +31,8 @@ class AnnouncementsViewSet(viewsets.ModelViewSet):
     """
     queryset = Announcements.objects.all()
     serializer_class = AnnoucementsSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('label', 'seen')
 
     def perform_create(self, serializer):
         serializer.save()
