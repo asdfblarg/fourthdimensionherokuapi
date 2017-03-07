@@ -25,7 +25,7 @@ SECRET_KEY = '0-40h^0=^q83)^(-e)o+$kalhfo(!6v)ch$j3rw9l2*be)z-oa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'fourthdimensiontestapi.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fourthdimensiontestapi.herokuapp.com']
 
 
 # Application definition

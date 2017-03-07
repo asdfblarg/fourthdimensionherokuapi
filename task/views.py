@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from task.models import Task_Table
+from task.models import Task_Table, Announcements
 from rest_framework import viewsets
-from task.serializers import TaskSerializer
+from task.serializers import TaskSerializer, AnnoucementsSerializer
 
 
 
 # Create your views here.
 
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task_Table.objects.all()
-    serializer_class =TaskSerializer
+# class TaskViewSet(viewsets.ModelViewSet):
+#     queryset = Task_Table.objects.all()
+#     serializer_class =TaskSerializer
 
 
 ####
@@ -20,23 +20,23 @@ from rest_framework import renderers
 from rest_framework.response import Response
 
 
-from rest_framework import viewsets
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         # 'users': reverse('user-list', request=request, format=format),
-        'tasks': reverse('task-list', request=request, format=format)
+        'tasks': reverse('tasks-list', request=request, format=format),
+        'announcements': reverse('announcements-list', request=request, format=format),
     })
 
 # from rest_framework.decorators import detail_route
+
 
 class TaskViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
-
-    Additionally we also provide an extra `highlight` action.
     """
     queryset = Task_Table.objects.all()
     serializer_class = TaskSerializer
@@ -52,5 +52,14 @@ class TaskViewSet(viewsets.ModelViewSet):
         # serializer.save(owner=self.request.user)
         serializer.save()
 
+class AnnouncementsViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = Announcements.objects.all()
+    serializer_class = AnnoucementsSerializer
 
+    def perform_create(self, serializer):
+        serializer.save()
 

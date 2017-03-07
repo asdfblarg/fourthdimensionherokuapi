@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from task.models import Task_Table
+from task.models import Task_Table, Announcements
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -17,4 +17,18 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
                   'types',
                   # 'completed_time',
                   'last_modified',
+                  )
+
+class AnnoucementsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Announcements
+        fields = (
+                    'url',
+                    'id',
+                    'created',
+                    'seen',
+                    'label',
+                    'description',
+                    'designee',
+                    'last_modified',
                   )

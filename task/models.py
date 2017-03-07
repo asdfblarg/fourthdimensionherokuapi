@@ -13,14 +13,14 @@ class Task_Table(models.Model):
     designee = models.CharField(max_length=50, blank=True)
     # started_time = models.DateTimeField(auto_now_add=True)
     # completed_time = models.DateTimeField(blank=True, default='')
-    CHOICES_OF_TYPE=(
+    CHOICES_OF_TYPE = (
         ('OTHERS', 'Others'),
         ('CLEANING', 'Cleaning'),
         ('COMPUTER', 'Computer Work'),
         ('DELIVERY', 'Delivery'),
         ('TRAVEL', 'Travel'),
     )
-    types = models.CharField(max_length=15, choices = CHOICES_OF_TYPE,
+    types = models.CharField(max_length=15, choices=CHOICES_OF_TYPE,
                              default='OTHERS')
 
     class Meta:
@@ -29,6 +29,17 @@ class Task_Table(models.Model):
     def started_time_pretty(self):
         return self.started_time.strftime('%b %e %Y')
 
-
     def completed_time_pretty(self):
         return self.completed_time.strftime('%b %e %Y')
+
+
+class Announcements(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    seen = models.BooleanField(default=False)
+    label = models.CharField(max_length=200, blank=True, default='')
+    description = models.TextField(default='')
+    designee = models.CharField(max_length=50, blank=True)
+
+    class Meta:
+        ordering = ('created',)
