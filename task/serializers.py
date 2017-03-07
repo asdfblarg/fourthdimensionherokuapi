@@ -29,6 +29,5 @@ class AnnoucementsSerializer(serializers.HyperlinkedModelSerializer):
                     'seen',
                     'label',
                     'description',
-                    'designee',
                     'last_modified',
                   )

@@ -39,7 +39,6 @@ class Announcements(models.Model):
     seen = models.BooleanField(default=False)
     label = models.CharField(max_length=200, blank=True, default='')
     description = models.TextField(default='')
-    designee = models.CharField(max_length=50, blank=True)
 
     class Meta:
         ordering = ('created',)

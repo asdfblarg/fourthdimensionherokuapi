@@ -7,32 +7,6 @@ from task.serializers import TaskSerializer, AnnoucementsSerializer
 
 # Create your views here.
 
-# class TaskViewSet(viewsets.ModelViewSet):
-#     queryset = Task_Table.objects.all()
-#     serializer_class =TaskSerializer
-
-
-####
-
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from rest_framework import renderers
-from rest_framework.response import Response
-
-
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        # 'users': reverse('user-list', request=request, format=format),
-        'tasks': reverse('tasks-list', request=request, format=format),
-        'announcements': reverse('announcements-list', request=request, format=format),
-    })
-
-# from rest_framework.decorators import detail_route
-
-
 class TaskViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
@@ -42,11 +16,6 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
     #                       IsOwnerOrReadOnly,)
-
-    # @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
-    # def highlight(self, request, *args, **kwargs):
-    #     snippet = self.get_object()
-    #     return Response(snippet.highlighted)
 
     def perform_create(self, serializer):
         # serializer.save(owner=self.request.user)
