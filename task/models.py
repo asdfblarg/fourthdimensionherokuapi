@@ -42,3 +42,12 @@ class Announcements(models.Model):
 
     class Meta:
         ordering = ('created',)
+
+
+class Users(models.Model):
+    name = models.CharField(max_length=100, blank=True, default='')
+    firebaseid = models.CharField(max_length=300, blank=True, default='')
+    email = models.CharField(max_length=200, blank=True, default='')
+
+    class Meta:
+        ordering = ('name',)

@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from task.models import Task_Table, Announcements
+from task.models import Task_Table, Announcements, Users
 from rest_framework import viewsets
-from task.serializers import TaskSerializer, AnnoucementsSerializer
+from task.serializers import TaskSerializer, AnnoucementsSerializer, UsersSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -33,6 +33,20 @@ class AnnouncementsViewSet(viewsets.ModelViewSet):
     serializer_class = AnnoucementsSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('label', 'seen')
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+class UsersViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('name', 'firebaseid', 'email')
 
     def perform_create(self, serializer):
         serializer.save()

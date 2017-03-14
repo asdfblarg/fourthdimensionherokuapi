@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from task.models import Task_Table, Announcements
+from task.models import Task_Table, Announcements, Users
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -30,4 +30,15 @@ class AnnoucementsSerializer(serializers.HyperlinkedModelSerializer):
                     'label',
                     'description',
                     'last_modified',
+                  )
+
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Users
+        fields = (
+                    'url',
+                    'id',
+                    'name',
+                    'firebaseid',
+                    'email',
                   )
