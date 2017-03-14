@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from task.models import Task_Table, Announcements, Users
+from task.models import Task_Table, Announcements, Users, WeekSchedule
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -41,4 +41,29 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
                     'name',
                     'firebaseid',
                     'email',
+                 )
+
+class WeekScheduleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = WeekSchedule
+        fields = (
+                    'url',
+                    'id',
+                    'firebaseid',
+                    'week_num',
+                    'year',
+                    'mon_start',
+                    'mon_end',
+                    'tues_start',
+                    'tues_end',
+                    'wed_start',
+                    'wed_end',
+                    'thurs_start',
+                    'thurs_end',
+                    'fri_start',
+                    'fri_end',
+                    'sat_start',
+                    'sat_end',
+                    'sun_start',
+                    'sun_end',
                   )

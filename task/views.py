@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from task.models import Task_Table, Announcements, Users
+from task.models import Task_Table, Announcements, Users, WeekSchedule
 from rest_framework import viewsets
-from task.serializers import TaskSerializer, AnnoucementsSerializer, UsersSerializer
+from task.serializers import TaskSerializer, AnnoucementsSerializer, UsersSerializer, WeekScheduleSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -51,3 +51,16 @@ class UsersViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
 
+
+class WeekScheduleViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = WeekSchedule.objects.all()
+    serializer_class = WeekScheduleSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('firebaseid', 'week_num', 'year', )
+
+    def perform_create(self, serializer):
+        serializer.save()

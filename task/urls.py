@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
 router.register(r'announcements', views.AnnouncementsViewSet)
 router.register(r'users', views.UsersViewSet)
+router.register(r'WeekSchedule', views.WeekScheduleViewSet)
 
 
 # The API URLs are now determined automatically by the router.
