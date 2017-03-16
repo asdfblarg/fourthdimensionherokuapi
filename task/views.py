@@ -15,7 +15,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task_Table.objects.all()
     serializer_class = TaskSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('label', 'completed', 'designee')
+    filter_fields = ('label', 'completed', 'designee', 'types',)
 
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
     #                       IsOwnerOrReadOnly,)
