@@ -1,4 +1,6 @@
 from django.db import models
+from dateutil.parser import parse
+import datetime
 
 # Create your models here.
 
@@ -19,8 +21,10 @@ class Task_Table(models.Model):
     label = models.CharField(max_length=200, blank=True, default='')
     description = models.TextField(default='')
     designee = models.CharField(max_length=50, blank=True)
-    # started_time = models.DateTimeField(auto_now_add=True)
-    # completed_time = models.DateTimeField(blank=True, default='')
+    # created_timestamp = models.IntegerField(editable=False, default=123)
+    created_timestamp = models.IntegerField(null=True, editable=False)
+    last_modified_timestamp = models.IntegerField(null=True, editable=False)
+
     CHOICES_OF_TYPE = (
         ('OTHERS', 'Others'),
         ('CLEANING', 'Cleaning'),
@@ -37,11 +41,30 @@ class Task_Table(models.Model):
     class Meta:
         ordering = ('created',)
 
-    def started_time_pretty(self):
-        return self.started_time.strftime('%b %e %Y')
+    # def created_timestamp(self):
+    #     return self.created.timestamp()
+    # def last_modified_timestamp(self):
+    #     return self.last_modified.timestamp()
 
-    def completed_time_pretty(self):
-        return self.completed_time.strftime('%b %e %Y')
+    def save(self, *args, **kargs):
+        if not self.created:# created is none before model is first created
+            self.created_timestamp = int(datetime.datetime.now().timestamp())
+        else:
+            self.created_timestamp = int(self.created.timestamp())
+
+
+        super(Task_Table, self).save(*args, **kargs)
+        try:
+            self.last_modified_timestamp = int(self.last_modified.timestamp())
+        except:
+            self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
+
+    #
+    # def create(self, *args, **kargs):
+    #     super(Task_Table, self).create(*args, **kargs)
+    #     # self.created_timestamp = int(self.created.timestamp())
+    #     # self.last_modified_timestamp = int(self.last_modified.timestamp())
+
 
 
 class Announcements(models.Model):

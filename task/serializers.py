@@ -3,23 +3,30 @@ from task.models import *#Task_Table, Announcements, Users, WeekSchedule
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
-    # cleaning_count = serializers.IntegerField()
+    # created_timestamp = serializers.CharField()#source='created_timestamp')
+    # last_modified_timestamp = serializers.CharField()#source='last_modified_timestamp')
+
     class Meta:
         model = Task_Table
         # fields = ( 'url', 'id', 'created', 'title', 'last_modified', 'completed',
         #     'label','description','designee','started_time','completed_time','types')
 
+        # created_timestamp = serializers.CharField()  # source='created_timestamp')
+        # last_modified_timestamp = serializers.CharField()  # source='last_modified_timestamp')
+
+        # created_timestamp = serializers.ReadOnlyField()
+        # last_modified_timestamp = serializers.ReadOnlyField()
         fields = ('url',
                   'id',
                   'created',
+                  'created_timestamp',
                   'completed',
                   'label',
                   'description',
                   'designee',
                   'types',
-                  # 'completed_time',
                   'last_modified',
-                  # 'cleaning_count',
+                  # 'last_modified_timestamp',
                   )
 
 

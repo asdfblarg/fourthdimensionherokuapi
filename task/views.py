@@ -2,8 +2,8 @@
 from task.models import *
 from rest_framework import viewsets
 from task.serializers import *
-from django_filters.rest_framework import DjangoFilterBackend
-
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
+import django_filters
 
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -27,6 +27,14 @@ class TaskPagination(PageNumberPagination):
             ('results', data),
         ]))
 
+class TaskFilter(FilterSet):
+    created_timestamp = django_filters.NumberFilter(name='last_modified_timestamp', lookup_expr='exact')
+    start = django_filters.NumberFilter(name='created_timestamp', lookup_expr='gte')
+    end = django_filters.NumberFilter(name='created_timestamp', lookup_expr='lte')
+    class Meta:
+        model = Task_Table
+        fields = ['label', 'completed', 'designee', 'types', 'created_timestamp', 'start', 'end',]
+
 
 # Create your views here.
 
@@ -42,7 +50,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     # print(Task_Table.objects.filter(types='CLEANING').count())
     serializer_class = TaskSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('label', 'completed', 'designee', 'types',)
+    # filter_fields = ('label', 'completed', 'designee', 'types')
+    filter_class = TaskFilter
     pagination_class = TaskPagination
 
 
