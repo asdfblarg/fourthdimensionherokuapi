@@ -2,7 +2,15 @@ from django.db import models
 
 # Create your models here.
 
+# class Task_Table_List(models.Model):
+#     pass
+#     # tasks_list = models.ForeignKey(Task_Table, on_delete=models.CASCADE)
+#     def get_queryset(self):
+#         return super(Task_Table_Manager, self).get_queryset().annotate(cleaning_count = models.Count('types'))
+
 class Task_Table(models.Model):
+    # task_list = models.ForeignKey(Task_Table_List, related_name='tasks_list' , null=True)
+
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
     last_modified = models.DateTimeField(auto_now=True)
@@ -22,6 +30,9 @@ class Task_Table(models.Model):
     )
     types = models.CharField(max_length=15, choices=CHOICES_OF_TYPE,
                              default='OTHERS')
+
+    # objects = models.Manager()
+    # cleaning_objects = Task_Table_Manager()
 
     class Meta:
         ordering = ('created',)
