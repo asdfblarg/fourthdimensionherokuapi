@@ -28,7 +28,7 @@ class TaskPagination(PageNumberPagination):
         ]))
 
 class TaskFilter(FilterSet):
-    created_timestamp = django_filters.NumberFilter(name='last_modified_timestamp', lookup_expr='exact')
+    created_timestamp = django_filters.NumberFilter(name='created_timestamp', lookup_expr='exact')
     start = django_filters.NumberFilter(name='created_timestamp', lookup_expr='gte')
     end = django_filters.NumberFilter(name='created_timestamp', lookup_expr='lte')
     class Meta:
