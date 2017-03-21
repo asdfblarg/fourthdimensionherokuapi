@@ -43,8 +43,8 @@ class Task_Table(models.Model):
 
     # def created_timestamp(self):
     #     return self.created.timestamp()
-    # def last_modified_timestamp(self):
-    #     return self.last_modified.timestamp()
+    def last_modified_timestamp(self):
+        return int(self.last_modified.timestamp())
 
     def save(self, *args, **kargs):
         if not self.created:# created is none before model is first created

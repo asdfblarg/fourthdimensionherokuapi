@@ -31,6 +31,7 @@ class TaskFilter(FilterSet):
     created_timestamp = django_filters.NumberFilter(name='created_timestamp', lookup_expr='exact')
     start = django_filters.NumberFilter(name='created_timestamp', lookup_expr='gte')
     end = django_filters.NumberFilter(name='created_timestamp', lookup_expr='lte')
+
     class Meta:
         model = Task_Table
         fields = ['label', 'completed', 'designee', 'types', 'created_timestamp', 'start', 'end',]

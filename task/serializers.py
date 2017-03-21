@@ -12,7 +12,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         #     'label','description','designee','started_time','completed_time','types')
 
         # created_timestamp = serializers.CharField()  # source='created_timestamp')
-        # last_modified_timestamp = serializers.CharField()  # source='last_modified_timestamp')
+        last_modified_timestamp = serializers.IntegerField()  # source='last_modified_timestamp')
 
         # created_timestamp = serializers.ReadOnlyField()
         # last_modified_timestamp = serializers.ReadOnlyField()
@@ -26,7 +26,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
                   'designee',
                   'types',
                   'last_modified',
-                  # 'last_modified_timestamp',
+                  'last_modified_timestamp',
                   )
 
 
