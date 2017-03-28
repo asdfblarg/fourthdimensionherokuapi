@@ -52,12 +52,16 @@ class Task_Table(models.Model):
         else:
             self.created_timestamp = int(self.created.timestamp())
 
+        if not self.last_modified:  # created is none before model is first created
+            self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
+        else:
+            self.last_modified_timestamp = int(self.last_modified.timestamp())
 
         super(Task_Table, self).save(*args, **kargs)
-        try:
-            self.last_modified_timestamp = int(self.last_modified.timestamp())
-        except:
-            self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
+        # try:
+        #     self.last_modified_timestamp = int(self.last_modified.timestamp())
+        # except:
+        #     self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
 
     #
     # def create(self, *args, **kargs):

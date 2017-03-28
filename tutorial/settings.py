@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'task.apps.TaskConfig',
-    # 'crispy_forms',
+    'crispy_forms',
 ]
 
 REST_FRAMEWORK = {

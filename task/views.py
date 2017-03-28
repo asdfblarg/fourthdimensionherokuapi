@@ -59,11 +59,18 @@ class TaskViewSet(viewsets.ModelViewSet):
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
     #                       IsOwnerOrReadOnly,)
     @list_route(methods=['get'])
-    def test_view(self, request, **kwargs):
+    def test_view(self, request):
         queryset = Task_Table.objects.all()
         cleaning_count = (Task_Table.objects.filter(types='CLEANING').count())
-
-        return Response({'cleaning' : cleaning_count,})
+        serializer = self.get_serializer(queryset, many=True)
+        # self.request.data
+        try:
+            print('DFKJDSHFDKFJDFKDSJFHDKSHFKSFHASDFHDSF')
+            print(self.request.query_params)
+            return Response(self.request.query_params)
+        except:
+            return Response('bye')
+        # return Response(serializer.data)
 
     # def get_queryset(self):
     #     return Task_Table.objects.annotate(cleaning_count = Count('types'))
