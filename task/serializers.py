@@ -1,6 +1,6 @@
 from rest_framework import serializers, pagination
 from task.models import *#Task_Table, Announcements, Users, WeekSchedule
-
+from rest_framework.validators import UniqueValidator
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     # created_timestamp = serializers.CharField()#source='created_timestamp')
@@ -95,6 +95,9 @@ class AnnoucementsSerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    firebaseid = serializers.CharField(validators=[UniqueValidator(queryset=Users.objects.all())])
+    email = serializers.CharField(validators=[UniqueValidator(queryset=Users.objects.all())])
+    
     class Meta:
         model = Users
         fields = (
