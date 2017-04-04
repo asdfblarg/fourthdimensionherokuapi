@@ -97,7 +97,7 @@ class AnnoucementsSerializer(serializers.HyperlinkedModelSerializer):
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
     firebaseid = serializers.CharField(validators=[UniqueValidator(queryset=Users.objects.all())])
     email = serializers.CharField(validators=[UniqueValidator(queryset=Users.objects.all())])
-    
+
     class Meta:
         model = Users
         fields = (
