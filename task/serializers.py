@@ -135,3 +135,15 @@ class WeekScheduleSerializer(serializers.HyperlinkedModelSerializer):
                     'sun_start',
                     'sun_end',
                   )
+
+class SharedTasksSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SharedTasks
+        fields = (
+            'url',
+            'id',
+            'created',
+            'label',
+            'description',
+            'last_modified',
+        )

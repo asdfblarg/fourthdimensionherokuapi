@@ -4,11 +4,12 @@ from rest_framework.routers import DefaultRouter
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'tasks', views.TaskViewSet)
+router.register(r'Tasks', views.TaskViewSet)
 # router.register(r'derp', views.DerpViewSet)
-router.register(r'announcements', views.AnnouncementsViewSet)
-router.register(r'users', views.UsersViewSet)
-router.register(r'WeekSchedule', views.WeekScheduleViewSet)
+router.register(r'Announcements', views.AnnouncementsViewSet)
+router.register(r'Users', views.UsersViewSet)
+router.register(r'Week Schedule', views.WeekScheduleViewSet)
+router.register(r'Shared Tasks', views.SharedTasksViewSet)
 
 
 # The API URLs are now determined automatically by the router.

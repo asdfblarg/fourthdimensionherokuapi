@@ -131,3 +131,10 @@ class WeekScheduleViewSet(viewsets.ModelViewSet):
     filter_fields = ('firebaseid', 'week_num', 'year', )
 
 
+class SharedTasksViewSet(viewsets.ModelViewSet):
+    """
+        This viewset automatically provides `list`, `create`, `retrieve`,
+        `update` and `destroy` actions.
+    """
+    queryset = SharedTasks.objects.all()
+    serializer_class = SharedTasksSerializer

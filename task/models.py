@@ -114,3 +114,9 @@ class WeekSchedule(models.Model):
 
     class Meta:
         ordering = ('id',)
+
+class SharedTasks(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    label = models.CharField(max_length=200, blank=True, default='')
+    description = models.TextField(default='')
