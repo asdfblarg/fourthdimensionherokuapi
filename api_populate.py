@@ -36,6 +36,7 @@ for task_id in range(14, 29):
     complete = random.choice([True,False])
     if complete:
         complete = {'completed':'true', }
-        r = requests.put('http://localhost:8000/tasks/{0}/'.format(task_id), data=complete)
-        print(r.url)
-        print(r.json())
+        r = requests.put('https://fourthdimensiontestapi.herokuapp.com/tasks/{0}/'.format(task_id), data=complete)
+        # r = requests.put('http://localhost:8000/tasks/{0}/'.format(task_id), data=complete)
+        # print(r.url)
+        # print(r.json())

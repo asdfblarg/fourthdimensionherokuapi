@@ -18,11 +18,22 @@ class TaskPagination(PageNumberPagination):
             type_counts[type] = type_counts.get(type, 0) + 1
 
         num_completed = len([task['completed'] for task in data if task['completed'] == True])
+        buffer_time = 15*60 #minutes*seconds
+        num_on_time = len([task['completed'] for task in data if
+                           task['completed'] == True and task['deadline_timestamp']+buffer_time >= task['last_modified_timestamp']])
+        num_late = len([task['completed'] for task in data if
+                           task['completed'] == True and task['deadline_timestamp']+buffer_time < task['last_modified_timestamp']])
+        num_unfinished = len([task['completed'] for task in data if task['completed'] == False])
 
+        stats = {'num_completed': num_completed, 'num_on_time': num_on_time, 'num_late': num_late, 'num_unfinished': num_unfinished,}
         # test = len([task for task in data if task['types']=='CLEANING'])
         return Response(OrderedDict([
             ('count', self.page.paginator.count),
-            ('num_completed', num_completed),
+            # ('num_completed', num_completed),
+            # ('num_on_time', num_on_time),
+            # ('num_late', num_late),
+            # ('num_unfinished', num_unfinished),
+            ('stats', stats),
             ('type_counts', type_counts),
             # ('cleaning', test),
             ('next', self.get_next_link()),

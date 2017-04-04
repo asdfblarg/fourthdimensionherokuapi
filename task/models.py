@@ -48,8 +48,8 @@ class Task_Table(models.Model):
     def deadline_timestamp(self):
         return int(self.created.timestamp()+ int(self.deadline*60))
 
-    # def last_modified_timestamp(self):
-    #     return int(self.last_modified.timestamp())
+    def last_modified_timestamp(self):
+        return int(self.last_modified.timestamp())
 
     def save(self, *args, **kargs):
         if not self.created:# created is none before model is first created
