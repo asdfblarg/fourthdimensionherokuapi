@@ -24,6 +24,7 @@ class Task_Table(models.Model):
     # created_timestamp = models.IntegerField(editable=False, default=123)
     created_timestamp = models.IntegerField(null=True, editable=False)
     last_modified_timestamp = models.IntegerField(null=True, editable=False)
+    deadline = models.IntegerField(null=True, default=60) # time in minutes
 
     CHOICES_OF_TYPE = (
         ('OTHERS', 'Others'),
@@ -43,8 +44,12 @@ class Task_Table(models.Model):
 
     # def created_timestamp(self):
     #     return self.created.timestamp()
-    def last_modified_timestamp(self):
-        return int(self.last_modified.timestamp())
+
+    def deadline_timestamp(self):
+        return int(self.created.timestamp()+ int(self.deadline*60))
+
+    # def last_modified_timestamp(self):
+    #     return int(self.last_modified.timestamp())
 
     def save(self, *args, **kargs):
         if not self.created:# created is none before model is first created
@@ -52,10 +57,7 @@ class Task_Table(models.Model):
         else:
             self.created_timestamp = int(self.created.timestamp())
 
-        if not self.last_modified:  # created is none before model is first created
-            self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
-        else:
-            self.last_modified_timestamp = int(self.last_modified.timestamp())
+        self.last_modified_timestamp = int(datetime.datetime.now().timestamp())
 
         super(Task_Table, self).save(*args, **kargs)
         # try:

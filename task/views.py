@@ -17,9 +17,12 @@ class TaskPagination(PageNumberPagination):
         for type in task_types:
             type_counts[type] = type_counts.get(type, 0) + 1
 
-        test = len([task for task in data if task['types']=='CLEANING'])
+        num_completed = len([task['completed'] for task in data if task['completed'] == True])
+
+        # test = len([task for task in data if task['types']=='CLEANING'])
         return Response(OrderedDict([
             ('count', self.page.paginator.count),
+            ('num_completed', num_completed),
             ('type_counts', type_counts),
             # ('cleaning', test),
             ('next', self.get_next_link()),
